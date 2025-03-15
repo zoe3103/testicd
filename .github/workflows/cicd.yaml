@@ -45,16 +45,16 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: appleboy/ssh-action@v1.2.2
-          with:
-            host: ${{ secrets.ZFVF }}
-            username: ubuntu
-            key: ${{ secrets.GFGF }}
-            script: |
-              cd /home/ubuntu/test_cicd
-              docker pull ghcr.io/zoe3103/testicd:main
-              docker compose restart
-              
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.ZFVF }}
+          username: ubuntu
+          key: ${{ secrets.GFGF }}
+          script: |
+            cd /home/ubuntu/test_cicd
+            docker pull ghcr.io/zoe3103/testicd:main
+            docker compose restart
