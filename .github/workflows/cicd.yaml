@@ -56,6 +56,5 @@ jobs:
           key: ${{ secrets.GFGF }}
           script: |
             cd /home/ubuntu/test_cicd
-            docker compose down
-            docker pull ghcr.io/zoe3103/testicd:main
+            docker compose pull
             docker compose up -d
